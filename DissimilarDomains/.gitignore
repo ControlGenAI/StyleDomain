@@ -1,0 +1,6 @@
+__pycache__/
+.cache/
+run*.sh
+calc*.sh
+project*.sh
+examples/afhq

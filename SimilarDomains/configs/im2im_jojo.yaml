@@ -1,0 +1,74 @@
+exp:
+  config_dir: configs
+  config: im2im_single.yaml
+  project: test_project
+  tags:
+    - test
+  name: test_run_jojo
+  seed: 0
+  root: .
+  notes: empty notes
+  logging: true
+  step_save: 25
+  trainer: im2im_JoJo
+training:
+  iter_num: 250
+  batch_size: 4
+  device: cuda:0
+  generator: stylegan2
+  phase: all
+  patch_key: original
+  source_class: Real Person
+  target_class: ./image_domains/jojo.png
+  auto_layer_k: 16
+  auto_layer_iters: 0
+  auto_layer_batch: 8
+  mixing_noise: 0.9
+  alpha: 1.
+  mix_stylespace: True
+  preserve_color: False
+inversion:
+  method: e4e
+  align_style: False
+  model_path: pretrained/e4e_ffhq_encode.pt
+  latents_root: 'latents_inversion_training'
+optimization_setup:
+  visual_encoders:
+    - ViT-B/32
+    - ViT-B/16
+  loss_funcs:
+    - disc_feat_matching
+  loss_coefs:
+    - 1.0
+  g_reg_every: 4
+  optimizer:
+    weight_decay: 0.0
+    lr: 0.002
+    betas:
+    - 0.0
+    - 0.999
+  scheduler:
+    n_steps: 20
+    start_lr: 0.001
+generator_args:
+  checkpoint_path: pretrained/StyleGAN2/stylegan2-ffhq-config-f.pt
+evaluation:
+  is_on: false
+  vision_models:
+    - ViT-B/32
+    - ViT-B/16
+  step: 200
+  data_size: 500
+  batch_size: 24
+  fid: true
+  fid_ref: ../few-shot-gan-adaptation/sketches_all_resized/
+logging:
+  log_every: 10
+  log_images: 20
+  latents_to_edit: []
+  truncation: 0.7
+  num_grid_outputs: 1
+checkpointing:
+  is_on: false
+  start_from: false
+  step_backup: 500

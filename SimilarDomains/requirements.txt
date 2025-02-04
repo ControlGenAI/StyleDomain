@@ -1,0 +1,15 @@
+torch==1.11.0
+torchdiffeq==0.2.3
+torchvision==0.12.0
+omegaconf
+wandb
+ftfy
+regex
+tqdm
+git+https://github.com/openai/CLIP.git
+scikit-image
+scikit-learn
+ipython
+dlib
+gdown
+click
